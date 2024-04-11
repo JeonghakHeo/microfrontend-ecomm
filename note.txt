@@ -1,0 +1,8 @@
+npm start webpack:
+bundle and output
+
+npm start webpack serve:
+run dev server, must be with devServer in webpack.config
+
+HtmlWebpackPlugin:
+place output bundle to html(in path defined in template)
