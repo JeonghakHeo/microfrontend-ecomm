@@ -30,3 +30,27 @@ new ModuleFederationPlugin({
 import 'products/ProductsIndex'
 // container index.js
 import('./bootstrap')
+
+** Section3 **
+
+L.20-22 Sharing dupe module
+shared: ['faker'] in product, cart
+new ModuleFederationPlugin({
+  name: '',
+  filename: 'remoteEntry.js',
+  exposes: {
+    '': './src/index',
+  },
+  shared: ['faker']
+})
+
+Error: Shared module is not available for eager consumption
+A module marked as shared, it is by default loaded asynchronously.
+So when entry file, index.js, gets loaded, it tries to use faker module instantaneously but we haven't loaded
+
+To fix, add import() to give Webpack the opportunity to take a look at what files the codes require to run successfully. When this opportunity given, Webpack can go load up the module before we try to execute the codes
+
+// index.js
+import('./bootstrap')
+// products.js
+import faker from 'faker'
