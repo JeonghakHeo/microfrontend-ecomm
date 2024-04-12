@@ -33,7 +33,7 @@ import('./bootstrap')
 
 ** Section3 **
 
-L.20-22 Sharing dupe module
+L.20-21 Sharing dupe module
 shared: ['faker'] in product, cart
 new ModuleFederationPlugin({
   name: '',
@@ -54,3 +54,10 @@ To fix, add import() to give Webpack the opportunity to take a look at what file
 import('./bootstrap')
 // products.js
 import faker from 'faker'
+
+L.22
+if shared modules have different major version, Webpack will load each of them, not as one single shared module.
+
+// ^major.minor.patch
+^4.1.1 ^4.2.3 can be loaded as shared
+^5.1.0 ^4.1.1 cannot be loade as shared
