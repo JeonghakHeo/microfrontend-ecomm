@@ -6,3 +6,27 @@ run dev server, must be with devServer in webpack.config
 
 HtmlWebpackPlugin:
 place output bundle to html(in path defined in template)
+
+** Module Federation **
+
+// products
+new ModuleFederationPlugin({
+  name: 'products',
+  filename: 'remoteEntry.js',
+  exposes: {
+    './ProductsIndex': './src/index',
+  },
+})
+
+// container
+new ModuleFederationPlugin({
+  name: 'container',
+  remotes: {
+    products: 'products@http://localhost:8081/remoteEntry.js',
+  },
+}),
+
+// container bootstrap.js
+import 'products/ProductsIndex'
+// container index.js
+import('./bootstrap')
