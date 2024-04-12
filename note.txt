@@ -61,3 +61,13 @@ if shared modules have different major version, Webpack will load each of them, 
 // ^major.minor.patch
 ^4.1.1 ^4.2.3 can be loaded as shared
 ^5.1.0 ^4.1.1 cannot be loade as shared
+
+L.24 Sub-App Execution Context
+In sub apps, they have thier own html to accept/display the output bundle.
+But in main app on produciton, it has a different html file that has different elements than the elements that have been used in isolated apps. 
+The main point to implement microfrontend is each engineering team can develop their products in isolation, so they should be able to develop and test on their isolated app.
+
+// A big assumption 
+document.querySelector('#dev-products').innerHTML = products
+We assume there will be an element with id of #dev-products.
+But it might not exist in production html.
