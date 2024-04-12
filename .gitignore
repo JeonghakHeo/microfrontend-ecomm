@@ -1,3 +1,4 @@
-container/node_modules/
-products/node_modules/
-cart/node_modules
+packages/auth/node_modules/
+packages/container/node_modules/
+packages/dashboard/node_modules/
+packages/marketing/node_modules/
