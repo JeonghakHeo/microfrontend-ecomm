@@ -16,7 +16,6 @@ export default () => {
           </Switch>
         </BrowserRouter>
       </StylesProvider>
-      <div>test</div>
     </div>
   )
 }
