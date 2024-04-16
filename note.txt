@@ -1,1 +1,42 @@
 "start": "webpack serve --config config/webpack.dev.js"
+
+** Route synchronization between container app and sub app **
+two way sync. container to sub app and sub app to container app
+
+Container uses browser history for routing while sub apps use memory history for routing.
+If sub apps use browser history for routing, it will collide with container app's browser history and cause route collision.
+
+To sync from sub app upto container app:
+A callback function will be passed down to sub app, resulting sub app to subscribe to container app and inform that route has been changed when happen. When container app recieves news about route changes in sub app, it will update its rotue accordingly by itself using its own history object.
+
+Memory history object from sub app can help find out where the sub app is attempting to navigate to. pathname
+
+onNavigate: (location) <- from
+const history = createMemoryHistory()
+
+  if (onNavigate) {
+    history.listen(onNavigate)
+  }
+
+listen provides location object that has pathname. This gets passed up to container as:
+
+onNavigate: (loacation) = onNavigate: ({ pathname: nextPathname }) => {
+        const { pathname } = history.location
+
+        if (pathname !== nextPathname) {
+          history.push(nextPathname)
+        }
+      },
+
+
+
+** Making sure in isolation sub app runs **
+// mount was expecting second arg that is onNavigate callback
+if (devRoot) {
+    mount(devRoot, {})
+  }
+
+// if only got onNavigate via container app, meaning it was called and mounted by container app, therefore was not in dev environment
+if (onNavigate) {
+  history.listen(onNavigate)
+}
