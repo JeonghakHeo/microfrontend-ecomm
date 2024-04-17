@@ -40,3 +40,10 @@ if (devRoot) {
 if (onNavigate) {
   history.listen(onNavigate)
 }
+
+
+** nested route can cause public file load issue **
+make sure to define publicPath property on weback dev config for dev environment.
+output: {
+    publicPath: 'http://localhost:8080/', <- / at the end important
+  }
