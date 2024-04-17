@@ -8,11 +8,11 @@ import {
 import Landing from './components/Landing'
 import Pricing from './components/Pricing'
 
-export default ({ history }) => {
-  const generateClassName = createGenerateClassName({
-    productionPrefix: 'ma',
-  })
+const generateClassName = createGenerateClassName({
+  productionPrefix: 'ma',
+})
 
+export default ({ history }) => {
   return (
     <div>
       <StylesProvider generateClassName={generateClassName}>
