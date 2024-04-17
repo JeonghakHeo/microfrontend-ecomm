@@ -1,11 +1,12 @@
 const { VueLoaderPlugin } = require('vue-loader')
+
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: '[name].[contenthash].js',
   },
   resolve: {
-    extension: ['.js', '.vue'],
+    extensions: ['.js', '.vue'],
   },
   module: {
     rules: [
@@ -19,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.scss|\.css$/,
-        use: ['vue-style-loader', 'style-loader', 'css-laoder', 'sass-loader'],
+        use: ['vue-style-loader', 'style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.m?js$/,
